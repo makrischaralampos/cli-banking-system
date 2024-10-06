@@ -5,6 +5,7 @@ public class Main {
     // Entry point of the program
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Account account = null; // Initially no account created
         boolean running = true;
 
         // Welcome message
@@ -25,26 +26,55 @@ public class Main {
 
             // Handle the user's choice
             switch (choice) {
+                // Create Account
                 case 1:
-                    System.out.println("Create Account chosen");
-                    // Add logic for account creation
+                    System.out.print("Enter account number: ");
+                    String accountNumber = scanner.next();
+                    System.out.print("Enter account holder name: ");
+                    String accountHolderName = scanner.next();
+                    System.out.print("Enter initial balance: ");
+                    double initialBalance = scanner.nextDouble();
+
+                    account = new Account(accountNumber, accountHolderName, initialBalance);
+                    System.out.println("Account created successfully.");
                     break;
+
                 case 2:
-                    System.out.println("Deposit Money chosen");
-                    // Add logic for depositing money
+                    // Deposit Money
+                    if (account != null) {
+                        System.out.print("Enter deposit amount: ");
+                        double depositAmount = scanner.nextDouble();
+                        account.deposit(depositAmount);
+                    } else {
+                        System.out.println("No account found. Please create an account first.");
+                    }
                     break;
+
                 case 3:
-                    System.out.println("Withdraw Money chosen");
-                    // Add logic for withdrawing money
+                    // Withdraw Money
+                    if (account != null) {
+                        System.out.print("Enter withdrawal amount: ");
+                        double withdrawalAmount = scanner.nextDouble();
+                        account.withdraw(withdrawalAmount);
+                    } else {
+                        System.out.println("No account found. Please create an account first.");
+                    }
                     break;
+
                 case 4:
-                    System.out.println("Check Balance chosen");
-                    // Add logic for checking balance
+                    // Check balance
+                    if (account != null) {
+                        System.out.println("Account balance: " + account.getBalance());
+                    } else {
+                        System.out.println("No account found. Please create an account first.");
+                    }
                     break;
+
                 case 5:
-                    System.out.println("Exiting...");
+                    // Exit
                     running = false; // Stop the loop to exit
                     break;
+                    
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
