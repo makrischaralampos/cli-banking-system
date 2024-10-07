@@ -1,11 +1,25 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
+    // List to store all accounts
+    private static List<Account> accounts = new ArrayList<>();
+
+    // Method to find an account by account number
+    private static Account findAccount(String accountNumber) {
+        for (Account account : accounts) {
+            if (account.getAccountNumber().equals(accountNumber)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
     // Entry point of the program
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Account account = null; // Initially no account created
         boolean running = true;
 
         // Welcome message
@@ -30,43 +44,57 @@ public class Main {
                 case 1:
                     System.out.print("Enter account number: ");
                     String accountNumber = scanner.next();
-                    System.out.print("Enter account holder name: ");
-                    String accountHolderName = scanner.next();
-                    System.out.print("Enter initial balance: ");
-                    double initialBalance = scanner.nextDouble();
+                    if (findAccount(accountNumber) != null) {
+                        System.out.println("Account number already exists. Please choose a different account number.");
+                    } else {
+                        System.out.print("Enter account holder name: ");
+                        String accountHolderName = scanner.next();
+                        System.out.print("Enter initial balance: ");
+                        double initialBalance = scanner.nextDouble();
 
-                    account = new Account(accountNumber, accountHolderName, initialBalance);
-                    System.out.println("Account created successfully.");
+                        Account newAccount = new Account(accountNumber, accountHolderName, initialBalance);
+                        accounts.add(newAccount);
+                        System.out.println("Account created successfully for " + accountHolderName);
+                    }
                     break;
 
                 case 2:
                     // Deposit Money
-                    if (account != null) {
+                    System.out.print("Enter account number: ");
+                    accountNumber = scanner.next();
+                    Account accountToDeposit = findAccount(accountNumber);
+                    if (accountToDeposit != null) {
                         System.out.print("Enter deposit amount: ");
                         double depositAmount = scanner.nextDouble();
-                        account.deposit(depositAmount);
+                        accountToDeposit.deposit(depositAmount);
                     } else {
-                        System.out.println("No account found. Please create an account first.");
+                        System.out.println("Account not found.");
                     }
                     break;
 
                 case 3:
                     // Withdraw Money
-                    if (account != null) {
+                    System.out.print("Enter account number: ");
+                    accountNumber = scanner.next();
+                    Account accountToWithdraw = findAccount(accountNumber);
+                    if (accountToWithdraw != null) {
                         System.out.print("Enter withdrawal amount: ");
                         double withdrawalAmount = scanner.nextDouble();
-                        account.withdraw(withdrawalAmount);
+                        accountToWithdraw.withdraw(withdrawalAmount);
                     } else {
-                        System.out.println("No account found. Please create an account first.");
+                        System.out.println("Account not found.");
                     }
                     break;
 
                 case 4:
                     // Check balance
-                    if (account != null) {
-                        System.out.println("Account balance: " + account.getBalance());
+                    System.out.print("Enter account number: ");
+                    accountNumber = scanner.next();
+                    Account accountToCheck = findAccount(accountNumber);
+                    if (accountToCheck != null) {
+                        System.out.println("Account balance: " + accountToCheck.getBalance());
                     } else {
-                        System.out.println("No account found. Please create an account first.");
+                        System.out.println("Account not found.");
                     }
                     break;
 
@@ -74,7 +102,7 @@ public class Main {
                     // Exit
                     running = false; // Stop the loop to exit
                     break;
-                    
+
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
