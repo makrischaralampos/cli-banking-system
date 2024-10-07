@@ -26,20 +26,20 @@ public class Account {
     // Method to deposit money
     public void deposit(double amount) {
         if (amount > 0) {
-            balance += amount;
-            System.out.println(amount + " deposited successfully. New balance: " + balance);
+            this.balance += amount;
+            System.out.println("Successfully deposited " + amount + ". New balance: " + this.balance);
         } else {
-            System.out.println("Invalid deposit amount.");
+            System.out.println("Deposit amount must be greater than 0.");
         }
     }
 
     // Method to withdraw money
     public void withdraw(double amount) {
         if (amount > 0 && amount <= balance) {
-            balance -= amount;
-            System.out.println(amount + " withdrawn successfully. New balance: " + balance);
+            this.balance -= amount;
+            System.out.println("Successfully withdrew " + amount + ". Remaining balance: " + this.balance);
         } else {
-            System.out.println("Invalid or insufficient funds.");
+            System.out.println("Insufficient balance or invalid amount.");
         }
     }
 }
