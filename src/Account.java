@@ -38,8 +38,10 @@ public class Account {
         if (amount > 0 && amount <= balance) {
             this.balance -= amount;
             System.out.println("Successfully withdrew " + amount + ". Remaining balance: " + this.balance);
+        } else if (amount <= 0) {
+            System.out.println("Withdrawal amount must be greater than 0.");
         } else {
-            System.out.println("Insufficient balance or invalid amount.");
+            System.out.println("Error: Insufficient balance");
         }
     }
 }
