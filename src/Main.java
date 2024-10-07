@@ -40,14 +40,14 @@ public class Main {
 
             // Handle the user's choice
             switch (choice) {
-                // Create Account
                 case 1:
+                    // Create Account
                     System.out.print("Enter account number: ");
                     String accountNumber = scanner.next();
 
                     // Check if the account number already exists
                     if (findAccount(accountNumber) != null) {
-                        System.out.println("Error: Account number already exists. Please use a different account number.");
+                        System.out.println("Error: Account number already exists.");
                     } else {
                         System.out.print("Enter account holder name: ");
                         String accountHolderName = scanner.next();
@@ -70,7 +70,7 @@ public class Main {
                         // Create and add new account
                         Account newAccount = new Account(accountNumber, accountHolderName, initialBalance);
                         accounts.add(newAccount);
-                        System.out.println("Account created successfully for " + accountHolderName);
+                        System.out.println("Account created successfully.");
                     }
                     break;
 
@@ -131,6 +131,7 @@ public class Main {
                 case 5:
                     // Exit
                     running = false; // Stop the loop to exit
+                    System.out.println("Thank you for using the CLI Banking System!");
                     break;
 
                 default:
@@ -140,6 +141,5 @@ public class Main {
 
         // Clean up
         scanner.close();
-        System.out.println("Thank you for using the CLI Banking System!");
     }
 }
