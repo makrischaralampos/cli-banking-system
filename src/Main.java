@@ -24,19 +24,20 @@ public class Main {
         boolean running = true;
 
         // Welcome message
-        System.out.println("Welcome to the CLI Banking System");
+        System.out.println("Welcome to the CLI Banking System!");
 
         // Main loop
         while (running) {
             // Displaying the menu
-            System.out.println("\nPlease choose an option:");
-            System.out.println("1. Create Account");
-            System.out.println("2. Deposit Money");
-            System.out.println("3. Withdraw Money");
-            System.out.println("4. Check Balance");
+            System.out.println("\nWhat would you like to do?");
+            System.out.println("1. Create a new account");
+            System.out.println("2. Deposit money");
+            System.out.println("3. Withdraw money");
+            System.out.println("4. Check account balance");
             System.out.println("5. Exit");
 
             try {
+                System.out.println("Please enter a number (1-5): ");
                 // Read the user's choice
                 int choice = scanner.nextInt();
 
@@ -72,71 +73,71 @@ public class Main {
                             // Create and add new account
                             Account newAccount = new Account(accountNumber, accountHolderName, initialBalance);
                             accounts.add(newAccount);
-                            System.out.println("Account created successfully.");
+                            System.out.println("Account created successfully!");
                         }
                         break;
 
                     case 2:
                         // Deposit Money
-                        System.out.print("Enter account number: ");
+                        System.out.print("Please enter your account number: ");
                         accountNumber = scanner.next();
                         Account accountToDeposit = findAccount(accountNumber);
                         if (accountToDeposit != null) {
-                            System.out.print("Enter deposit amount: ");
+                            System.out.print("Enter the amount to deposit: ");
                             double depositAmount = scanner.nextDouble();
 
                             if (depositAmount > 0) {
                                 accountToDeposit.deposit(depositAmount);
                             } else {
-                                System.out.println("Error: Deposit amount must be positive.");
+                                System.out.println("Oops! The deposit amount must be positive. Please try again.");
                             }
                         } else {
-                            System.out.println("Account not found.");
+                            System.out.println("Sorry, we couldn't find an account with that number.");
                         }
                         break;
 
                     case 3:
                         // Withdraw Money
-                        System.out.print("Enter account number: ");
+                        System.out.print("Please enter your account number: ");
                         accountNumber = scanner.next();
                         Account accountToWithdraw = findAccount(accountNumber);
                         if (accountToWithdraw != null) {
-                            System.out.print("Enter withdrawal amount: ");
+                            System.out.print("Enter the amount to withdraw: ");
                             double withdrawalAmount = scanner.nextDouble();
 
                             if (withdrawalAmount > 0) {
                                 accountToWithdraw.withdraw(withdrawalAmount);
                             } else {
-                                System.out.println("Error: Withdrawal amount must be positive.");
+                                System.out.println("Oops! The withdrawal amount must be positive. Please try again.");
                             }
                         } else {
-                            System.out.println("Account not found.");
+                            System.out.println("Sorry, we couldn't find an account with that number.");
                         }
                         break;
 
                     case 4:
                         // Check balance
-                        System.out.print("Enter account number: ");
+                        System.out.print("Please enter your account number: ");
                         accountNumber = scanner.next();
                         Account accountToCheck = findAccount(accountNumber);
                         if (accountToCheck != null) {
-                            System.out.println("Account balance: " + accountToCheck.getBalance());
+                            System.out.println("Your current balance is: $" + accountToCheck.getBalance());
                         } else {
-                            System.out.println("Account not found.");
+                            System.out.println("Sorry, we couldn't find an account with that number.");
                         }
                         break;
 
                     case 5:
                         // Exit
+                        System.out.println("Thank you for using the CLI Banking System! Have a great day!");
                         running = false; // Stop the loop to exit
-                        System.out.println("Thank you for using the CLI Banking System!");
                         break;
 
                     default:
-                        System.out.println("Invalid choice. Please try again.");
+                        System.out.println("Invalid option! Please enter a number between 1 and 5.");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Error: Invalid input. Please enter numbers only.");
+                System.out.println("Invalid input! Please enter a valid number.");
                 scanner.nextLine(); // Clear invalid input
             }
         }

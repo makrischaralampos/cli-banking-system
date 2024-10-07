@@ -27,7 +27,7 @@ public class Account {
     public void deposit(double amount) {
         if (amount > 0) {
             this.balance += amount;
-            System.out.println("Successfully deposited " + amount + ". New balance: " + this.balance);
+            System.out.println("Successfully deposited $" + amount + ". New balance: $" + this.balance);
         } else {
             System.out.println("Deposit amount must be greater than 0.");
         }
@@ -37,7 +37,7 @@ public class Account {
     public void withdraw(double amount) {
         if (amount > 0 && amount <= balance) {
             this.balance -= amount;
-            System.out.println("Successfully withdrew " + amount + ". Remaining balance: " + this.balance);
+            System.out.println("Successfully withdrew $" + amount + ". Remaining balance: $" + this.balance);
         } else if (amount <= 0) {
             System.out.println("Withdrawal amount must be greater than 0.");
         } else {
